@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Trade Solutions - Export Import & Manufacturing</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #002244;
+            --accent-color: #FFD700;
+            --bg-color: #f9f9f9;
+            --text-dark: #333;
+            --text-muted: #666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), #003366);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            border-top: 4px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating Background Elements */
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Navbar Animations */
+        .navbar {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Hero Section Animations */
+        .hero {
+            background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23FFD700" stop-opacity="0.1"/><stop offset="100%" stop-color="%23FFD700" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>');
+            animation: backgroundMove 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundMove {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-10px, -10px) scale(1.05); }
+            66% { transform: translate(10px, -5px) scale(0.95); }
+        }
+
+        .hero h1 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: slideInUp 1s ease 0.5s forwards;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0;
+            animation: slideInUp 1s ease 0.7s forwards;
+        }
+
+        .typing-effect {
+            border-right: 3px solid var(--accent-color);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: var(--accent-color); }
+            51%, 100% { border-color: transparent; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CTA Button Animations */
+        #cta-button {
+            background: linear-gradient(45deg, var(--accent-color), #ffed4e);
+            border: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: slideInUp 1s ease 0.9s forwards;
+        }
+
+        #cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        #cta-button:hover::before {
+            left: 100%;
+        }
+
+        #cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Section Styling */
+        .about-section, .services-section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .about-section h2, .services-section h2, .strengths h2 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .about-section p, .services-section p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        /* Strengths Section */
+        .strengths {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .strength-card {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .strength-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .strength-card:hover::before {
+            left: 100%;
+        }
+
+        .strength-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .strength-icon {
+            color: var(--accent-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .strength-card:hover .strength-icon {
+            transform: scale(1.2) rotate(360deg);
+            color: var(--primary-color);
+        }
+
+        /* Animated Counter */
+        .counter {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #003366 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="b" cx="50%" cy="50%"><stop offset="0%" stop-color="%23FFD700" stop-opacity="0.1"/><stop offset="100%" stop-color="%23FFD700" stop-opacity="0"/></radialGradient></defs><circle cx="100" cy="100" r="50" fill="url(%23b)"/><circle cx="900" cy="200" r="80" fill="url(%23b)"/><circle cx="200" cy="800" r="60" fill="url(%23b)"/></svg>');
+            animation: backgroundMove 15s ease-in-out infinite reverse;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        .btn-outline-light {
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-outline-light::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.4s;
+        }
+
+        .btn-outline-light:hover::before {
+            left: 100%;
+        }
+
+        .btn-outline-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #001122 100%);
+            color: white;
+            padding: 50px 0 30px;
+            position: relative;
+        }
+
+        .footer h5 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer a:hover {
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        /* Section Divider Animation */
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border: none;
+            margin: 0 auto 3rem;
+            width: 0;
+            transition: width 1s ease;
+        }
+
+        .section-divider.visible {
+            width: 80px;
+        }
+
+        /* Pulse Animation */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .strength-card:hover {
+                transform: translateY(-5px) scale(1.01);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-globe-americas me-2"></i>
+                GlobalTrade Solutions
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="floating-shapes">
+            <div class="shape">
+                <i class="fas fa-shipping-fast" style="font-size: 3rem; color: var(--accent-color);"></i>
+            </div>
+            <div class="shape">
+                <i class="fas fa-globe" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+            </div>
+            <div class="shape">
+                <i class="fas fa-industry" style="font-size: 3.5rem; color: var(--accent-color);"></i>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-10">
+                    <h1 class="display-4 mb-4 typing-effect">
+                        Connecting Global Markets Through Quality Trade & Manufacturing
+                    </h1>
+                    <p class="lead mb-5">
+                        We specialize in the export and import of premium-quality goods, offering seamless global trade solutions and custom-manufactured products tailored to international standards.
+                    </p>
+                    <button id="cta-button" class="btn btn-lg pulse">
+                        <i class="fas fa-envelope me-2"></i>
+                        Get in Touch
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-5" style="background: linear-gradient(135deg, var(--primary-color), #003366);">
+        <div class="container">
+            <div class="row text-center text-white">
+                <div class="col-lg-3 col-md-6 mb-4 fade-in">
+                    <div class="counter" data-target="15">0</div>
+                    <p class="mb-0">Years Experience</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 fade-in">
+                    <div class="counter" data-target="50">0</div>
+                    <p class="mb-0">Countries Served</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 fade-in">
+                    <div class="counter" data-target="1000">0</div>
+                    <p class="mb-0">Happy Clients</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 fade-in">
+                    <div class="counter" data-target="500">0</div>
+                    <p class="mb-0">Products Exported</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Are Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="display-5 mb-4 fade-in">Who We Are</h2>
+                    <hr class="section-divider fade-in">
+                    <p class="lead fade-in">
+                        We are a dynamic export-import company based in Nagpur, India, committed to delivering excellence through global trade and manufacturing. We serve as a bridge between demand and supply across continents, ensuring quality products reach markets worldwide with precision and reliability.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Do Section -->
+    <section class="services-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="display-5 mb-4 fade-in">What We Do</h2>
+                    <hr class="section-divider fade-in">
+                    <p class="lead fade-in">
+                        We trade and manufacture a wide range of products for international markets. From sourcing quality goods to customizing and shipping them globally, we ensure end-to-end supply chain reliability. Our expertise spans multiple industries, delivering tailored solutions that meet the unique demands of each market.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Strengths Section -->
+    <section class="strengths">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-5 mb-4 fade-in">Our Strengths</h2>
+                    <hr class="section-divider fade-in">
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="card strength-card text-center p-4">
+                        <div class="card-body">
+                            <i class="fas fa-shipping-fast strength-icon"></i>
+                            <h5 class="card-title fw-bold">Export Expertise</h5>
+                            <p class="card-text">
+                                Decades of experience in international trade with deep knowledge of global market requirements and regulations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="card strength-card text-center p-4">
+                        <div class="card-body">
+                            <i class="fas fa-handshake strength-icon"></i>
+                            <h5 class="card-title fw-bold">Trusted Global Network</h5>
+                            <p class="card-text">
+                                Strong partnerships with suppliers, manufacturers, and distributors across multiple continents.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="card strength-card text-center p-4">
+                        <div class="card-body">
+                            <i class="fas fa-industry strength-icon"></i>
+                            <h5 class="card-title fw-bold">Quality Manufacturing</h5>
+                            <p class="card-text">
+                                State-of-the-art manufacturing facilities ensuring products meet international quality standards.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="card strength-card text-center p-4">
+                        <div class="card-body">
+                            <i class="fas fa-clock strength-icon"></i>
+                            <h5 class="card-title fw-bold">Timely Delivery</h5>
+                            <p class="card-text">
+                                Reliable logistics and supply chain management ensuring on-time delivery across global markets.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="card strength-card text-center p-4">
+                        <div class="card-body">
+                            <i class="fas fa-cogs strength-icon"></i>
+                            <h5 class="card-title fw-bold">Tailored Trade Solutions</h5>
+                            <p class="card-text">
+                                Customized solutions designed to meet specific client requirements and market demands.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="card strength-card text-center p-4">
+                        <div class="card-body">
+                            <i class="fas fa-certificate strength-icon"></i>
+                            <h5 class="card-title fw-bold">Compliance Excellence</h5>
+                            <p class="card-text">
+                                Full compliance with international trade regulations and quality certifications.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8 fade-in">
+                    <h2 class="display-5 mb-4">
+                        <i class="fas fa-envelope me-3"></i>
+                        Get in Touch with Us Today
+                    </h2>
+                    <p class="lead mb-4">
+                        Start Your Global Trade Journey with a Trusted Partner
+                    </p>
+                    <p class="mb-4">
+                        Ready to expand your business globally? Contact us today to discuss how we can help you navigate international markets and achieve your trade objectives.
+                    </p>
+                    <button class="btn btn-outline-light btn-lg px-5 py-3">
+                        <i class="fas fa-phone me-2"></i>
+                        Contact Us Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 fade-in">
+                    <h5>
+                        <i class="fas fa-globe-americas me-2"></i>
+                        GlobalTrade Solutions
+                    </h5>
+                    <p class="mb-3">
+                        Your trusted partner in global trade and manufacturing, connecting markets worldwide with quality and reliability.
+                    </p>
+                    <div class="social-icons d-flex">
+                        <a href="#" class="me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4 fade-in">
+                    <h5>Contact Information</h5>
+                    <p class="mb-2">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        Nagpur, Maharashtra, India
+                    </p>
+                    <p class="mb-2">
+                        <i class="fas fa-phone me-2"></i>
+                        +91 XXX XXX XXXX
+                    </p>
+                    <p class="mb-2">
+                        <i class="fas fa-envelope me-2"></i>
+                        info@globaltradesolutions.com
+                    </p>
+                </div>
+                
+                <div class="col-lg-4 mb-4 fade-in">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home">Home</a></li>
+                        <li class="mb-2"><a href="#about">About Us</a></li>
+                        <li class="mb-2"><a href="#services">Services</a></li>
+                        <li class="mb-2"><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            
+            <div class="row">
+                <div class="col-12 text-center fade-in">
+                    <p class="mb-0">
+                        &copy; 2024 GlobalTrade Solutions. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Loading Animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animation classes
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .section-divider').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current) + '+';
+            }, 16);
+        }
+
+        // Trigger counter animation when visible
+        const counterObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.counter').forEach(counter => {
+            counterObserver.observe(counter);
+        });
+
+        // Typing effect for hero title
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Start typing effect after page load
+        setTimeout(() => {
+            const heroTitle = document.querySelector('.hero h1');
+            const originalText = heroTitle.textContent;
+            typeWriter(heroTitle, originalText, 30);
+        }, 1500);
+
+        // Add hover sound effect (optional)
+        document.querySelectorAll('.strength-card, #cta-button, .btn').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                // You can add a subtle sound effect here if desired
+                this.style.transform = this.style.transform || '';
+            });
+        });
+
+        // Parallax effect for floating shapes
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.shape');
+            
+            shapes.forEach((shape, index) => {
+                const speed = 0.5 + (index * 0.1);
+                shape.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+            });
+        });
+
+        // Add click ripple effect
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+            circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+            circle.classList.add('ripple');
+
+            const ripple = button.getElementsByClassName('ripple')[0];
+            if (ripple) {
+                ripple.remove();
+            }
+
+            button.appendChild(circle);
+        }
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('button, .btn').forEach(button => {
+            button.addEventListener('click', createRipple);
+        });
+
+        // Add CSS for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.6);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                pointer-events: none;
+            }
+            
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>

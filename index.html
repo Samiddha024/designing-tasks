@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Trade Solutions - Export Import & Manufacturing</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #002244;
+            --accent-color: #FFD700;
+            --bg-color: #f9f9f9;
+            --text-dark: #333;
+            --text-muted: #666;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+            padding: 100px 0;
+        }
+        
+        .hero h1 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        #cta-button {
+            background-color: var(--accent-color);
+            border: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        #cta-button:hover {
+            background-color: #e6c200;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+        
+        .about-section, .services-section {
+            padding: 80px 0;
+        }
+        
+        .about-section h2, .services-section h2, .strengths h2 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        
+        .about-section p, .services-section p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+        
+        .strengths {
+            background-color: white;
+            padding: 80px 0;
+        }
+        
+        .strength-card {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .strength-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .strength-icon {
+            color: var(--accent-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #003366 100%);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px 0 30px;
+        }
+        
+        .footer h5 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: var(--accent-color);
+        }
+        
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border: none;
+            margin: 0 auto 3rem;
+            width: 80px;
+        }
+         
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-globe-americas me-2"></i>
+                GlobalTrade Solutions
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-10">
+                    <h1 class="display-4 mb-4">
+                        Connecting Global Markets Through Quality Trade & Manufacturing
+                    </h1>
+                    <p class="lead mb-5">
+                        We specialize in the export and import of premium-quality goods, offering seamless global trade solutions and custom-manufactured products tailored to international standards.
+                    </p>
+                    <button id="cta-button" class="btn btn-lg">
+                        <i class="fas fa-envelope me-2"></i>
+                        Get in Touch
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Are Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="display-5 mb-4">Who We Are</h2>
+                    <hr class="section-divider">
+                    <p class="lead">
+                        We are a dynamic export-import company based in Nagpur, India, committed to delivering excellence through global trade and manufacturing. We serve as a bridge between demand and supply across continents, ensuring quality products reach markets worldwide with precision and reliability.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Do Section -->
+    <section class="services-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="display-5 mb-4">What We Do</h2>
+                    <hr class="section-divider">
+                    <p class="lead">
+                        We trade and manufacture a wide range of products for international markets. From sourcing quality goods to customizing and shipping them globally, we ensure end-to-end supply chain reliability. Our expertise spans multiple industries, delivering tailored solutions that meet the unique demands of each market.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Strengths Section -->
+    <section class="strengths">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-5 mb-4">Our Strengths</h2>
+                    <hr class="section-divider">
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card strength-card text-center p-4">
+                        <div class="card-body">
+                            <i class="fas fa-shipping-fast strength-icon"></i>
+                            <h5 class="card-title fw-bold">Export Expertise</h5>
+                            <p class="card-text">
+                                Decades of experience in international trade with deep knowledge of global market requirements and regulations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card strength-card text-center p-4">
+                        <div class="card-body">
+                            <i class="fas fa-handshake strength-icon"></i>
+                            <h5 class="card-title fw-bold">Trusted Global Network</h5>
+                            <p class="card-text">
+                                Strong partnerships with suppliers, manufacturers, and distributors across multiple continents.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card strength-card text-center p-4">
+                        <div class="card-body">
+                            <i class="fas fa-industry strength-icon"></i>
+                            <h5 class="card-title fw-bold">Quality Manufacturing</h5>
+                            <p class="card-text">
+                                State-of-the-art manufacturing facilities ensuring products meet international quality standards.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card strength-card text-center p-4">
+                        <div class="card-body">
+                            <i class="fas fa-clock strength-icon"></i>
+                            <h5 class="card-title fw-bold">Timely Delivery</h5>
+                            <p class="card-text">
+                                Reliable logistics and supply chain management ensuring on-time delivery across global markets.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card strength-card text-center p-4">
+                        <div class="card-body">
+                            <i class="fas fa-cogs strength-icon"></i>
+                            <h5 class="card-title fw-bold">Tailored Trade Solutions</h5>
+                            <p class="card-text">
+                                Customized solutions designed to meet specific client requirements and market demands.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card strength-card text-center p-4">
+                        <div class="card-body">
+                            <i class="fas fa-certificate strength-icon"></i>
+                            <h5 class="card-title fw-bold">Compliance Excellence</h5>
+                            <p class="card-text">
+                                Full compliance with international trade regulations and quality certifications.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="display-5 mb-4">
+                        <i class="fas fa-envelope me-3"></i>
+                        Get in Touch with Us Today
+                    </h2>
+                    <p class="lead mb-4">
+                        Start Your Global Trade Journey with a Trusted Partner
+                    </p>
+                    <p class="mb-4">
+                        Ready to expand your business globally? Contact us today to discuss how we can help you navigate international markets and achieve your trade objectives.
+                    </p>
+                    <button class="btn btn-outline-light btn-lg px-5 py-3">
+                        <i class="fas fa-phone me-2"></i>
+                        Contact Us Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5>
+                        <i class="fas fa-globe-americas me-2"></i>
+                        GlobalTrade Solutions
+                    </h5>
+                    <p class="mb-3">
+                        Your trusted partner in global trade and manufacturing, connecting markets worldwide with quality and reliability.
+                    </p>
+                    <div class="d-flex">
+                        <a href="#" class="me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5>Contact Information</h5>
+                    <p class="mb-2">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        Nagpur, Maharashtra, India
+                    </p>
+                    <p class="mb-2">
+                        <i class="fas fa-phone me-2"></i>
+                        +91 XXX XXX XXXX
+                    </p>
+                    <p class="mb-2">
+                        <i class="fas fa-envelope me-2"></i>
+                        info@globaltradesolutions.com
+                    </p>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home">Home</a></li>
+                        <li class="mb-2"><a href="#about">About Us</a></li>
+                        <li class="mb-2"><a href="#services">Services</a></li>
+                        <li class="mb-2"><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">
+                        &copy; 2024 GlobalTrade Solutions. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Simple smooth scrolling -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
